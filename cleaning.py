@@ -11,12 +11,25 @@ with open('data/marketing_campaign.csv', newline='') as csvfile:
     for row in reader:
         skip = False
         cleanRow = copy.deepcopy(row)
+        
+        if row['Education'] not in valid_education:
+            print("Education invalid in " + " ".join(row.values()))
+
         if row['Marital_Status'] not in valid_marital_status:
+            print("Marital_Status invalid in " + " ".join(row.values()))
+        if row['Marital_Status'] == "Alone":
+            cleanRow['Marital_Status'] = "Single"
+        if row['Marital_Status'] == "Together":
+            a = 0
+            # What to do?
+        
+        if row['Income'] == '':
+            a = 0
+            # What to do?
+
+        if '' in row.values():
             print(row.values())
-        # elif row['Education'] not in valid_education:
-        #     print(row.values())
-        # elif row['Income'] == '':
-        #     print(row.values())
+
         if not skip:
             marketing_campaign_data.append(cleanRow)
 
