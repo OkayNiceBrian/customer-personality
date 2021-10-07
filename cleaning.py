@@ -9,6 +9,7 @@ marketing_campaign_data = []
 with open('data/marketing_campaign.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile, delimiter='\t', quotechar='|')
     for row in reader:
+        skip = False
         cleanRow = copy.deepcopy(row)
         if row['Marital_Status'] not in valid_marital_status:
             print(row.values())
@@ -16,7 +17,8 @@ with open('data/marketing_campaign.csv', newline='') as csvfile:
         #     print(row.values())
         # elif row['Income'] == '':
         #     print(row.values())
-        marketing_campaign_data.append(cleanRow)
+        if not skip:
+            marketing_campaign_data.append(cleanRow)
 
 with open('data/marketing_campaign_CLEANED.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter='\t', quotechar='|', quoting=csv.QUOTE_MINIMAL)
